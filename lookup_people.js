@@ -17,7 +17,7 @@ client.connect((error) => {
     return console.error("Connection Error", error);
   }
 
-  client.query(`SELECT * FROM famous_people WHERE first_name = '${firstname}'`, (error, results) => {
+  client.query(`SELECT * FROM famous_people WHERE first_name = $1::text;`, [firstname], (error, results) => {
     if(error) throw error;
 
     console.log('Found', results.rowCount, 'person(s) by the name', `'${firstname}' :`);
